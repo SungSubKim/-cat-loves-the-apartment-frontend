@@ -10,12 +10,17 @@
     <b-col class="sm-3" align="left">
       <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
     </b-col> -->
+
     <b-col class="sm-3">
       <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
     </b-col>
     <b-col class="sm-3">
       <b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
     </b-col>
+    <b-col class="sm-3">
+     <b-form-input v-model.lazy="searchDate" @change="searchApt"></b-form-input>
+    </b-col>
+
   </b-row>
 </template>
 
@@ -28,10 +33,11 @@ export default {
     return {
       sidoCode: null,
       gugunCode: null,
+      searchDate:null,
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
+    ...mapState(["sidos", "guguns","houses"]),
     // sidos() {
     //   return this.$store.state.sidos;
     // },
@@ -56,7 +62,9 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      console.log("searchAPT!!", this.gugunCode, this.searchDate);
+      const param = { gugunCode: this.gugunCode, searchDate:this.searchDate};
+      if (this.gugunCode && this.searchDate) this.getHouseList(param);
     },
   },
 };

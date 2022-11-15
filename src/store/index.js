@@ -35,6 +35,7 @@ export default new Vuex.Store({
   },
   mutations: {
     /////////////////////////////// House start /////////////////////////////////////
+   
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
@@ -97,7 +98,7 @@ export default new Vuex.Store({
       http
         .get(`/map/sido`)
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           commit("SET_SIDO_LIST", data);
         })
         .catch((error) => {
@@ -115,7 +116,7 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
-    getHouseList({ commit }, gugunCode) {
+    getHouseList({ commit }, params) {
       // vue cli enviroment variables 검색
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
@@ -129,10 +130,12 @@ export default new Vuex.Store({
       //   DEAL_YMD: "202207",
       //   serviceKey: decodeURIComponent(SERVICE_KEY),
       // };
+      // searchDate = "202207";
+      const { gugunCode, searchDate } = params;
       http
-        .get(`/map/aptlist/${gugunCode}/${202207}`)
+        .get(`/map/aptlist/${gugunCode}/${searchDate}`)
         .then(({ data }) => {
-          // console.log(commit, data);
+          console.log(data);
           commit("SET_HOUSE_LIST", data.response.body.items.item);
         })
         .catch((error) => {

@@ -35,6 +35,11 @@
         >
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <b-alert show variant="warning">거래년월일 : {{ house.년 }}년 {{ house.월 }}월 {{ house.일 }}일</b-alert>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
