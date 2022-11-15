@@ -1,6 +1,7 @@
 <template>
   <b-container v-if="house" class="bv-example-row">
     <b-row>
+      {{house}}
       <b-col
         ><h3>{{ house.아파트 }}</h3></b-col
       >
@@ -37,7 +38,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-alert show variant="warning">거래년월일 : {{ house.년 }}년 {{ house.월 }}월 {{ house.일 }}일</b-alert>
+        <b-alert show variant="dark">거래년월일 : {{ house.년 }}년 {{ house.월 }}월 {{ house.일 }}일</b-alert>
       </b-col>
     </b-row>
   </b-container>
@@ -45,8 +46,11 @@
 
 <script>
 import { mapState } from "vuex";
-
+import { mapActions } from "vuex";
 export default {
+ methods: {
+    ...mapActions(["detailHouse"]),
+ },
   name: "HouseDetail",
   computed: {
     ...mapState(["house"]),

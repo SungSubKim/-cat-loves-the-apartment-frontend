@@ -18,7 +18,7 @@
       <b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
     </b-col>
     <b-col class="sm-3">
-     <b-form-input v-model.lazy="searchDate" @change="searchApt"></b-form-input>
+     <b-form-input v-model.lazy="searchDate" placeholder="거래년월일( YYYYMM )" @change="searchApt"></b-form-input>
     </b-col>
 
   </b-row>
@@ -33,7 +33,7 @@ export default {
     return {
       sidoCode: null,
       gugunCode: null,
-      searchDate:null,
+      searchDate:202207,
     };
   },
   computed: {
@@ -62,7 +62,7 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      console.log("searchAPT!!", this.gugunCode, this.searchDate);
+      // console.log("searchAPT!!", this.gugunCode, this.searchDate);
       const param = { gugunCode: this.gugunCode, searchDate:this.searchDate};
       if (this.gugunCode && this.searchDate) this.getHouseList(param);
     },
