@@ -25,40 +25,6 @@
 				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도 생성 및 객체 리턴
 				console.log(map);
 			},
-			drawPosition(latitude, longitude, name) {
-				// 마커 이미지의 이미지 주소입니다
-				var imageSrc = "${root}/assets/img/a.png";
-
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(24, 35);
-
-				// 마커 이미지를 생성합니다
-				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map: map, // 마커를 표시할 지도
-					position: new kakao.maps.LatLng(latitude, longitude), // 마커를 표시할 위치
-					title: name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image: markerImage, // 마커 이미지
-				});
-				map.setCenter(new kakao.maps.LatLng(latitude, longitude));
-
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-
-				var iwContent = '<div style="padding:2px;width: auto;">' + name + "</div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-					iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
-
-				// 인포윈도우를 생성합니다
-				var infowindow = new kakao.maps.InfoWindow({
-					position: iwPosition,
-					content: iwContent,
-				});
-
-				// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-				infowindow.open(map, marker);
-			},
 		},
 		mounted() {
 			//script 태그 객체 생성
