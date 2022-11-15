@@ -6,12 +6,19 @@
 </template>
 
 <script>
+import { mapActions,mapState } from "vuex";
 	export default {
 		name: "HouseMap",
 		data() {
-			return {};
-		},
-		methods: {
+			return {
+				houses: [],
+			};
+	},
+	computed: {
+		...mapState(["map"]),
+	},
+	methods: {
+			...mapActions(["setMap"]),
 			/* eslint-disable */
 			initMap() {
 				var mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
@@ -23,7 +30,10 @@
 				};
 
 				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도 생성 및 객체 리턴
-				console.log(map);
+				// console.log("map");
+				// console.log(map);
+				// console.log("setMapfunc")
+				// this.setMap(map);
 			},
 		},
 		mounted() {
