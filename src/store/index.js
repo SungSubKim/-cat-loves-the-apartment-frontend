@@ -13,6 +13,8 @@ export default new Vuex.Store({
     house: null,
     todos: [
       // { title: '할 일1', completed: false },
+      // { title: '할 일1', completed: false },
+      // { title: '할 일2', completed: false },
       // { title: '할 일2', completed: false },
     ],
   },
