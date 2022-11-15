@@ -45,10 +45,6 @@ const routes = [
 		],
 	},
 	{
-		path: "/kakaomap",
-		component: () => import("@/components/kakaomap/KakaoMap"),
-	},
-	{
 		path: "/board",
 		name: "board",
 		component: () => import("@/views/AppBoard"),
