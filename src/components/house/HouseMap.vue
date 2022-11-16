@@ -6,19 +6,29 @@
 </template>
 
 <script>
-import { mapActions,mapState } from "vuex";
+	import { mapState } from "vuex";
 	export default {
 		name: "HouseMap",
+		computed: {
+			...mapState(["houses"]),
+		},
 		data() {
 			return {
-				houses: [],
+				map: null,
 			};
-	},
-	computed: {
-		...mapState(["map"]),
-	},
-	methods: {
-			...mapActions(["setMap"]),
+		},
+		watch: {
+			houses: function (newHouses) {
+				console.log("..watch houses");
+				this.initMap();
+				newHouses.forEach((house) => {
+					console.log(house.latitude, house.longitude, house.apartmentName);
+					this.drawPosition(house.latitude, house.longitude, house.apartmentName);
+					// this.drawPosition(37.4784, 126.9518, "test");
+				});
+			},
+		},
+		methods: {
 			/* eslint-disable */
 			initMap() {
 				var mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
@@ -29,11 +39,45 @@ import { mapActions,mapState } from "vuex";
 					level: 6, //지도의 레벨(확대, 축소 정도)
 				};
 
-				var map = new kakao.maps.Map(mapContainer, mapOptions); //지도 생성 및 객체 리턴
-				// console.log("map");
-				// console.log(map);
-				// console.log("setMapfunc")
-				// this.setMap(map);
+				this.map = new kakao.maps.Map(mapContainer, mapOptions); //지도 생성 및 객체 리턴
+			},
+
+			/* eslint-disable */
+			drawPosition(latitude, longitude, name) {
+				console.log("drawPosition", latitude, longitude, name);
+				var map = this.map;
+				// console.log("drawPosition");
+				// 마커 이미지의 이미지 주소입니다
+				var imageSrc = require("@/assets/marker.png");
+				// console.log(imageSrc);
+				// "@/assets/ssafy_logo.png";
+
+				// 마커 이미지의 이미지 크기 입니다
+				var imageSize = new kakao.maps.Size(24, 35);
+
+				// 마커 이미지를 생성합니다
+				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map: map, // 마커를 표시할 지도
+					position: new kakao.maps.LatLng(latitude, longitude), // 마커를 표시할 위치
+					title: name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					image: markerImage, // 마커 이미지
+				});
+				map.setCenter(new kakao.maps.LatLng(latitude, longitude));
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+
+				var iwContent = '<div style="padding:1px;width: auto;font-size:xx-small">' + name + "</div > ", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+					iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
+
+				// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+					position: iwPosition,
+					content: iwContent,
+				});
+				// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+				infowindow.open(map, marker);
 			},
 		},
 		mounted() {

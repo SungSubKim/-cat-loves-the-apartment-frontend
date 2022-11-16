@@ -2,14 +2,15 @@ import Vue from "vue";
 import Vuex from "vuex";
 import http from "@/api/http";
 import createPersistedState from "vuex-persistedstate";
-
+import boardStore from "@/store/modules/boardStore.js";
+import userStore from "@/store/modules/userStore.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
 		sidos: [{ value: null, text: "선택하세요" }],
 		guguns: [{ value: null, text: "선택하세요" }],
-		houseinfo: [],
+		houses: [],
 		testtest: [1, 2, 3, 4, 5],
 		house: null,
 		todos: [
@@ -130,19 +131,29 @@ export default new Vuex.Store({
 			//   DEAL_YMD: "202207",
 			//   serviceKey: decodeURIComponent(SERVICE_KEY),
 			// };
-			http
-				.get(`/map/aptlist/${gugunCode}/${202207}`)
-				.then(({ data }) => {
-					// console.log(commit, data);
-					commit("SET_HOUSE_LIST", data.response.body.items.item);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			// console.log("gugunCode");
+			// console.log(gugunCode);
+			// http
+			// 	.get(`/map/aptlist/${gugunCode}/${202207}`)
+			// 	.then(({ data }) => {
+			// 		// console.log(commit, data);
+			// 		commit("SET_HOUSE_LIST", data.response.body.items.item);
+			// 	})
+			// 	.catch((error) => {
+			// 		console.log(error);
+			// 	});
+			http.get(`/housedeal/${gugunCode}`).then(({ data }) => {
+				// console.log(commit, data);
+				console.log("gugunCode22", gugunCode);
+				// console.log(data);
+				// console.log(data.response);
+				commit("SET_HOUSE_LIST", data);
+			});
 		},
 		detailHouse({ commit }, house) {
 			// 나중에 house.일련번호를 이용하여 API 호출
-			// console.log(commit, house);
+			console.log("detailHouse", house);
+			console.log(commit, house);
 			commit("SET_DETAIL_HOUSE", house);
 		},
 		/////////////////////////////// House end /////////////////////////////////////
@@ -167,11 +178,11 @@ export default new Vuex.Store({
 		},
 		//////////////////////////// Todo List end //////////////////////////////////
 	},
-	modules: {},
 	plugins: [
 		createPersistedState({
 			// 브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)
 			storage: sessionStorage,
 		}),
 	],
+	modules: { boardStore, userStore },
 });
