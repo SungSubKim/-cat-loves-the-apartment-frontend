@@ -98,20 +98,31 @@
 					resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
 					isUseId = false;
 				} else {
-					fetch("${root}/user/" + userid)
-						.then((response) => response.text())
-						.then((data) => {
-							if (data == 0) {
-								console.log(data);
-								resultDiv.setAttribute("class", "mb-3 text-primary");
-								resultDiv.textContent = userid + "는 사용할 수 있습니다.";
-								isUseId = true;
-							} else {
-								resultDiv.setAttribute("class", "mb-3 text-danger");
-								resultDiv.textContent = userid + "는 사용할 수 없습니다.";
-								isUseId = false;
-							}
-						});
+					http.get("/user/idcheck/" + userid).then((res) => {
+						if (res.data) {
+							resultDiv.setAttribute("class", "mb-3 text-danger");
+							resultDiv.textContent = "이미 사용중인 아이디 입니다.";
+							isUseId = false;
+						} else {
+							resultDiv.setAttribute("class", "mb-3 text-success");
+							resultDiv.textContent = "사용 가능한 아이디 입니다.";
+							isUseId = true;
+						}
+					});
+					// fetch("${root}/user/" + userid)
+					// 	.then((response) => response.text())
+					// 	.then((data) => {
+					// 		if (data == 0) {
+					// 			console.log(data);
+					// 			resultDiv.setAttribute("class", "mb-3 text-primary");
+					// 			resultDiv.textContent = userid + "는 사용할 수 있습니다.";
+					// 			isUseId = true;
+					// 		} else {
+					// 			resultDiv.setAttribute("class", "mb-3 text-danger");
+					// 			resultDiv.textContent = userid + "는 사용할 수 없습니다.";
+					// 			isUseId = false;
+					// 		}
+					// 	});
 				}
 			});
 
