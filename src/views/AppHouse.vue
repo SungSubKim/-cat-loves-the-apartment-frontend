@@ -3,7 +3,7 @@
 		<h3 class="underline-orange"><b-icon icon="house-fill"></b-icon> House Service</h3>
 		<b-row>
 			<b-col>
-				<b-img alt="Happy House" :src="require('@/assets/happyhouse.png')" />
+				<b-img style="width: 70%; padding: 10px" alt="Happy House" :src="require('@/assets/house.jpg')" />
 			</b-col>
 		</b-row>
 		<b-row>

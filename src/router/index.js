@@ -88,10 +88,10 @@ const router = new VueRouter({
 router.beforeEach((/*이동하려는 라우트 정보 */ to, /*가려는 라우트 정보*/ from, next) => {
 	//라우팅 시 해당 라우트가 책관련 라우트이고
 	//유저정보를 갖고 있지 않다면
-	console.log("beforeEach");
-	console.log(store.state.userStore);
-	console.log(store.state.userStore.userInfo);
-	console.log(store.state.userStore.userInfo.userid);
+	// console.log("beforeEach");
+	// console.log(store.state.userStore);
+	// console.log(store.state.userStore.userInfo);
+	// console.log(store.state.userStore.userInfo.userid);
 	if (to.path.includes("board") && !store.state.userStore.userInfo.userid) {
 		alert("로그인이 필요한 서비스입니다.");
 		return false;
