@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import http from "@/api/http";
+import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
 import boardStore from "@/store/modules/boardStore.js";
 import userStore from "@/store/modules/userStore.js";
@@ -13,6 +14,7 @@ export default new Vuex.Store({
 		houses: [],
 		testtest: [1, 2, 3, 4, 5],
 		house: null,
+		randomImgUrl:null,
 		todos: [
 			// { title: '할 일1', completed: false },
 			// { title: '할 일1', completed: false },
@@ -63,6 +65,9 @@ export default new Vuex.Store({
 		SET_DETAIL_HOUSE(state, house) {
 			// console.log("Mutations", house);
 			state.house = house;
+		},
+		SET_RANDOM_IMG_URL(state, url) {
+			state.randomImgUrl = url;
 		},
 		/////////////////////////////// House end /////////////////////////////////////
 
@@ -117,17 +122,27 @@ export default new Vuex.Store({
 					console.log(error);
 				});
 		},
-		getHouseList({ commit }, { gugunCode }) {
-			http.get(`/housedeal/${gugunCode}`).then(({ data }) => {
-				// console.log(commit, data);
+		getHouseList({ commit }, { gugunCode, searchDate }) {
+			http.get(`/housedeal/${ gugunCode }/${ searchDate }`).then(({ data }) => {
 				console.log("gugunCode22", gugunCode);
-				// console.log(data);
-				// console.log(data.response);
 				commit("SET_HOUSE_LIST", data);
 			});
 		},
+		getRandomImgUrl({ commit }) {
+			console.log("!!!!!!!!!!!!!GETRANDOMIMGURL")
+			axios.get("https://api.thecatapi.com/v1/images/search").then(({ data }) => {
+				commit("SET_RANDOM_IMG_URL", data[0].url);
+			}
+			);
+		},
 		detailHouse({ commit }, house) {
 			console.log("아파트이름", house.apartmentName);
+			// axios.get("https://api.thecatapi.com/v1/images/search").then(({ data }) => {
+			// 	console.log(commit);
+			// 	house.imageUrl = data[0].url;
+			// 	commit("SET_DETAIL_HOUSE", house);
+			// }
+			// );
 			http
 				.get(`/map/image?aptName=${house.apartmentName}`)
 				.then(({ data }) => {
@@ -138,6 +153,7 @@ export default new Vuex.Store({
 				.catch((error) => {
 					console.log(error);
 				});
+			
 		},
 		/////////////////////////////// House end /////////////////////////////////////
 

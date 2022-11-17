@@ -26,8 +26,9 @@
 					console.log(newHouses);
 					this.initMap();
 				}
+				console.log(newHouses);
 				newHouses.forEach((house) => {
-					console.log(house.latitude, house.longitude, house.apartmentName);
+					// console.log(house.latitude, house.longitude, house.apartmentName);
 					this.drawPosition(house.latitude, house.longitude, house.apartmentName);
 					// this.drawPosition(37.4784, 126.9518, "test");
 				});
@@ -49,7 +50,7 @@
 
 			/* eslint-disable */
 			drawPosition(latitude, longitude, name) {
-				console.log("drawPosition", latitude, longitude, name);
+				// console.log("drawPosition", latitude, longitude, name);
 				var map = this.map;
 				// console.log("drawPosition");
 				// 마커 이미지의 이미지 주소입니다

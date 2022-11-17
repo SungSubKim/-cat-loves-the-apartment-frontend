@@ -33,11 +33,11 @@ export default {
     return {
       sidoCode: null,
       gugunCode: null,
-      searchDate:202207,
+      searchDate: 201901,
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns","houses"]),
+    ...mapState(["sidos", "guguns", "houses"]),
     // sidos() {
     //   return this.$store.state.sidos;
     // },
@@ -46,11 +46,12 @@ export default {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
+    this.CLEAR_GUGUN_LIST();
     this.CLEAR_APT_LIST();
     this.getSido();
   },
   methods: {
-    ...mapActions(["getSido", "getGugun", "getHouseList"]),
+    ...mapActions(["getSido", "getGugun", "getHouseList", "getRandomImgUrl"]),
     ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
     // sidoList() {
     //   this.getSido();
@@ -58,16 +59,20 @@ export default {
     gugunList() {
       // console.log(this.sidoCode);
       this.CLEAR_GUGUN_LIST();
+      this.CLEAR_APT_LIST();
       this.gugunCode = null;
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      // console.log("searchAPT!!", this.gugunCode, this.searchDate);
-      const param = { gugunCode: this.gugunCode, searchDate:this.searchDate};
-      if (this.gugunCode && this.searchDate) this.getHouseList(param);
+      this.CLEAR_APT_LIST();
+      const param = { gugunCode: this.gugunCode, searchDate: this.searchDate };
+      if (this.gugunCode && this.searchDate) {
+        this.getHouseList(param);
+        this.getRandomImgUrl();
+      }
     },
-  },
-};
+  }
+}
 </script>
 
 <style></style>

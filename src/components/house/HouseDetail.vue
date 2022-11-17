@@ -1,13 +1,13 @@
 <template>
 	<b-container v-if="house" class="bv-example-row">
-		{{ house }}
 		<b-row>
 			<b-col
 				><h3>{{ house.apartmentName }}</h3></b-col
 			>
 		</b-row>
 		<b-row class="mb-2 mt-1">
-			<b-col><b-img :src="require('@/assets/apt.png')" fluid-grow></b-img></b-col>
+			<b-col><b-img :src="house.imageUrl" fluid-grow></b-img></b-col>
+			<!-- <b-col><b-img :src="require('@/assets/apt.png')" fluid-grow></b-img></b-col> -->
 		</b-row>
 		<b-row>
 			<b-col>
@@ -45,7 +45,7 @@
 	export default {
 		name: "HouseDetail",
 		computed: {
-			...mapState(["house"]),
+			...mapState(["house","randomImgUrl"]),
 			// house() {
 			//   return this.$store.state.house;
 			// },
