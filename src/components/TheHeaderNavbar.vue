@@ -42,7 +42,7 @@
 
 				<!-- Right aligned nav items -->
 				<b-navbar-nav class="ml-auto">
-					<b-nav-item v-if="userInfo.userid"> {{ userInfo.userid }}님, 반갑습니다! </b-nav-item>
+					<b-nav-item v-if="userInfo.userid" style="margin-top: 10px;margin-right: 10px;"> {{ userInfo.userid }}님, 반갑습니다! </b-nav-item>
 					<b-nav-item-dropdown right>
 						<template #button-content>
 							<b-icon icon="people" font-scale="2"></b-icon>
