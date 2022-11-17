@@ -10,31 +10,32 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-10 col-md-10 col-sm-12">
 						<b-form @submit="onSubmit" @reset="onReset">
-							<b-form-group label="이름: " label-for="userName" description="이름을 입력하세요">
+							<b-form-group label="이름: " label-for="username" description="이름을 입력하세요">
 								<b-form-input
 									class="form-control"
 									id="username"
 									type="text"
-									v-model="userInfo.userName"
+									v-model="userInfo.username"
 									placeholder="이름..."
 								/>
 							</b-form-group>
-							<b-form-group label="아이디: " label-for="userId" description="아이디를 입력하세요">
+							<b-form-group label="아이디: " label-for="userid" description="아이디를 입력하세요">
 								<b-form-input
 									class="form-control"
 									id="userid"
 									type="text"
-									v-model="userInfo.userId"
+									v-model="userInfo.userid"
+									@keyup="idcheck"
 									placeholder="아이디..."
 								/>
 							</b-form-group>
 							<div id="idcheck-result"></div>
-							<b-form-group label="비밀번호: " label-for="userPassword" description="비밀번호를 입력하세요">
+							<b-form-group label="비밀번호: " label-for="userpwd" description="비밀번호를 입력하세요">
 								<b-form-input
 									class="form-control"
-									id="userpassword"
+									id="userPwd"
 									type="password"
-									v-model="userInfo.userPassword"
+									v-model="userInfo.userpwd"
 									placeholder="비밀번호..."
 								/>
 							</b-form-group>
@@ -43,20 +44,14 @@
 								label-for="userPasswordConfirm"
 								description="비밀번호를 다시 입력하세요"
 							>
-								<b-form-input
-									class="form-control"
-									id="userpasswordconfirm"
-									type="password"
-									v-model="userInfo.userPasswordConfirm"
-									placeholder="비밀번호 확인..."
-								/>
+								<b-form-input class="form-control" v-model="pwdcheck" type="password" placeholder="비밀번호 확인..." />
 							</b-form-group>
-							<b-form-group label="이메일: " label-for="userEmail" description="이메일을 입력하세요">
+							<b-form-group label="이메일: " label-for="email" description="이메일을 입력하세요">
 								<b-form-input
 									class="form-control"
-									id="useremail"
+									id="email"
 									type="email"
-									v-model="userInfo.userEmail"
+									v-model="userInfo.email"
 									placeholder="이메일..."
 								/>
 							</b-form-group>
@@ -79,111 +74,84 @@
 		name: "UserRegister",
 		data() {
 			return {
+				isUseId: false,
 				userInfo: {
-					userName: "",
-					userId: "",
-					userPwd: "",
-					emailId: "",
-					emailDomain: "",
+					username: "",
+					userid: "",
+					userpwd: "",
+					email: "",
 				},
+				pwdcheck: "",
 			};
 		},
-		mounted() {
-			let isUseId = false;
-			document.querySelector("#userid").addEventListener("keyup", function () {
-				let userid = this.value;
+		// mounted() {
+		// 	// let isUseId = false;
+		// 	// document.querySelector("#userid").addEventListener("keyup", ()=> );
+		// },
+		methods: {
+			idcheck() {
+				console.log("idcheck");
+				let userid = this.userInfo.userid;
 				let resultDiv = document.querySelector("#idcheck-result");
-				if (userid.length < 6 || userid.length > 16) {
+				console.log;
+				if (userid.length < 4 || userid.length > 16) {
 					resultDiv.setAttribute("class", "mb-3 text-dark");
-					resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
-					isUseId = false;
+					resultDiv.textContent = "아이디는 4자 이상 16자 이하 입니다.";
+					this.isUseId = false;
 				} else {
-					http.get("/user/idcheck/" + userid).then((res) => {
-						if (res.data) {
+					http.get("/user/" + userid).then((res) => {
+						console.log(res);
+						if (res.data.userInfo) {
 							resultDiv.setAttribute("class", "mb-3 text-danger");
 							resultDiv.textContent = "이미 사용중인 아이디 입니다.";
-							isUseId = false;
+							this.isUseId = false;
 						} else {
 							resultDiv.setAttribute("class", "mb-3 text-success");
 							resultDiv.textContent = "사용 가능한 아이디 입니다.";
-							isUseId = true;
+							this.isUseId = true;
 						}
 					});
-					// fetch("${root}/user/" + userid)
-					// 	.then((response) => response.text())
-					// 	.then((data) => {
-					// 		if (data == 0) {
-					// 			console.log(data);
-					// 			resultDiv.setAttribute("class", "mb-3 text-primary");
-					// 			resultDiv.textContent = userid + "는 사용할 수 있습니다.";
-					// 			isUseId = true;
-					// 		} else {
-					// 			resultDiv.setAttribute("class", "mb-3 text-danger");
-					// 			resultDiv.textContent = userid + "는 사용할 수 없습니다.";
-					// 			isUseId = false;
-					// 		}
-					// 	});
 				}
-			});
-
-			document.querySelector("#btn-join").addEventListener("click", function () {
-				if (!document.querySelector("#username").value) {
-					alert("이름 입력!!");
-					return;
-				} else if (!document.querySelector("#userid").value) {
-					alert("아이디 입력!!");
-					return;
-				} else if (!document.querySelector("#userpwd").value) {
-					alert("비밀번호 입력!!");
-					return;
-				} else if (document.querySelector("#userpwd").value != document.querySelector("#pwdcheck").value) {
-					alert("비밀번호 확인!!");
-					return;
-				} else if (!isUseId) {
-					alert("아이디 확인!!");
-					return;
-				} else {
-					let form = document.querySelector("#form-join");
-					form.setAttribute("action", "${root}/user/join");
-					form.submit();
-				}
-			});
-		},
-		methods: {
+			},
 			onSubmit(event) {
 				event.preventDefault();
-
-				let err = true;
-				let msg = "";
-				!this.article.userid && ((msg = "작성자 입력해주세요"), (err = false), this.$refs.userid.focus());
-				err && !this.article.subject && ((msg = "제목 입력해주세요"), (err = false), this.$refs.subject.focus());
-				err && !this.article.content && ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
-
-				if (!err) alert(msg);
-				else this.type === "register" ? this.registArticle() : this.modifyArticle();
+				console.log("submit");
+				if (!this.userInfo.username) {
+					alert("이름 입력!!");
+					return;
+				} else if (!this.userInfo.userid) {
+					alert("아이디 입력!!");
+					return;
+				} else if (!this.userInfo.userpwd) {
+					alert("비밀번호 입력!!");
+					return;
+				} else if (this.userInfo.userpwd != this.pwdcheck) {
+					alert("비밀번호 확인!!");
+					return;
+				} else if (this.isUseId == false) {
+					alert("아이디 중복체크!!");
+					return;
+				}
+				this.registUser();
 			},
 			onReset(event) {
 				event.preventDefault();
-				this.article.articleno = 0;
-				this.article.subject = "";
-				this.article.content = "";
-				this.moveList();
+				this.userInfo.username = "";
+				this.userInfo.userid = "";
+				this.userInfo.userpwd = "";
+				this.userInfo.email = "";
+				this.pwdcheck = "";
 			},
-			registArticle() {
-				http
-					.post(`/board`, {
-						userid: this.article.userid,
-						subject: this.article.subject,
-						content: this.article.content,
-					})
-					.then(({ data }) => {
-						let msg = "등록 처리시 문제가 발생했습니다.";
-						if (data === "success") {
-							msg = "등록이 완료되었습니다.";
-						}
-						alert(msg);
-						this.moveList();
-					});
+			registUser() {
+				console.log("registUser");
+				http.post(`/user/join`, this.userInfo).then(({ data }) => {
+					let msg = "등록 처리시 문제가 발생했습니다.";
+					if (data === "success") {
+						msg = "등록이 완료되었습니다.";
+					}
+					alert(msg);
+					this.$router.push({ name: "login" });
+				});
 			},
 		},
 	};

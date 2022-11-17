@@ -20,10 +20,12 @@
 		watch: {
 			/* eslint-disable */
 			houses: function (newHouses) {
-				// console.log("..watch houses");
-				if (newHouses.legnth > 0) {
-					// console.log("initmap");
-					// console.log(newHouses);
+				console.log("..watch houses");
+				console.log(newHouses.length);
+				console.log(newHouses.length > 0);
+				if (newHouses.length > 0) {
+					console.log("initmap");
+					console.log(newHouses);
 					this.initMap();
 				}
 				newHouses.forEach((house) => {
@@ -45,6 +47,7 @@
 				};
 
 				this.map = new kakao.maps.Map(mapContainer, mapOptions); //지도 생성 및 객체 리턴
+				console.log("initMap");
 			},
 
 			/* eslint-disable */
