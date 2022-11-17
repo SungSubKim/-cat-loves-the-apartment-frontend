@@ -10,56 +10,64 @@
     <b-col class="sm-3" align="left">
       <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
     </b-col> -->
-		<b-col class="sm-3">
-			<b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
-		</b-col>
-		<b-col class="sm-3">
-			<b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
-		</b-col>
-	</b-row>
+
+    <b-col class="sm-3">
+      <b-form-select v-model="sidoCode" :options="sidos" @change="gugunList"></b-form-select>
+    </b-col>
+    <b-col class="sm-3">
+      <b-form-select v-model="gugunCode" :options="guguns" @change="searchApt"></b-form-select>
+    </b-col>
+    <b-col class="sm-3">
+     <b-form-input v-model.lazy="searchDate" placeholder="거래년월일( YYYYMM )" @change="searchApt"></b-form-input>
+    </b-col>
+
+  </b-row>
 </template>
 
 <script>
 	import { mapState, mapActions, mapMutations } from "vuex";
 
-	export default {
-		name: "HouseSearchBar",
-		data() {
-			return {
-				sidoCode: null,
-				gugunCode: null,
-			};
-		},
-		computed: {
-			...mapState(["sidos", "guguns", "houses", "map"]),
-			// sidos() {
-			//   return this.$store.state.sidos;
-			// },
-		},
-		created() {
-			// this.$store.dispatch("getSido");
-			// this.sidoList();
-			this.CLEAR_SIDO_LIST();
-			this.CLEAR_APT_LIST();
-			this.getSido();
-		},
-		methods: {
-			...mapActions(["getSido", "getGugun", "getHouseList"]),
-			...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
-			// sidoList() {
-			//   this.getSido();
-			// },
-			gugunList() {
-				// console.log(this.sidoCode);
-				this.CLEAR_GUGUN_LIST();
-				this.gugunCode = null;
-				if (this.sidoCode) this.getGugun(this.sidoCode);
-			},
-			searchApt() {
-				if (this.gugunCode) this.getHouseList(this.gugunCode);
-			},
-		},
-	};
+export default {
+  name: "HouseSearchBar",
+  data() {
+    return {
+      sidoCode: null,
+      gugunCode: null,
+      searchDate:202207,
+    };
+  },
+  computed: {
+    ...mapState(["sidos", "guguns","houses"]),
+    // sidos() {
+    //   return this.$store.state.sidos;
+    // },
+  },
+  created() {
+    // this.$store.dispatch("getSido");
+    // this.sidoList();
+    this.CLEAR_SIDO_LIST();
+    this.CLEAR_APT_LIST();
+    this.getSido();
+  },
+  methods: {
+    ...mapActions(["getSido", "getGugun", "getHouseList"]),
+    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
+    // sidoList() {
+    //   this.getSido();
+    // },
+    gugunList() {
+      // console.log(this.sidoCode);
+      this.CLEAR_GUGUN_LIST();
+      this.gugunCode = null;
+      if (this.sidoCode) this.getGugun(this.sidoCode);
+    },
+    searchApt() {
+      // console.log("searchAPT!!", this.gugunCode, this.searchDate);
+      const param = { gugunCode: this.gugunCode, searchDate:this.searchDate};
+      if (this.gugunCode && this.searchDate) this.getHouseList(param);
+    },
+  },
+};
 </script>
 
 <style></style>

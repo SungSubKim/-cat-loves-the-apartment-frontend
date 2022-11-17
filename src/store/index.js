@@ -151,11 +151,18 @@ export default new Vuex.Store({
 			});
 		},
 		detailHouse({ commit }, house) {
-			// 나중에 house.일련번호를 이용하여 API 호출
-			console.log("detailHouse", house);
-			console.log(commit, house);
-			commit("SET_DETAIL_HOUSE", house);
-		},
+      console.log("아파트이름", house.아파트);
+     http
+        .get(`/map/image?aptName=${house.아파트}`)
+        .then(({ data }) => {
+          console.log(data);
+          house.imageUrl = data.imageUrl;
+          commit("SET_DETAIL_HOUSE", house);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 		/////////////////////////////// House end /////////////////////////////////////
 
 		//////////////////////////// Todo List start //////////////////////////////////
