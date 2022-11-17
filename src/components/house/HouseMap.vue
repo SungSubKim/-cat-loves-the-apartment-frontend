@@ -18,9 +18,14 @@
 			};
 		},
 		watch: {
+			/* eslint-disable */
 			houses: function (newHouses) {
 				console.log("..watch houses");
-				this.initMap();
+				if (newHouses.legnth > 0) {
+					console.log("initmap");
+					console.log(newHouses);
+					this.initMap();
+				}
 				newHouses.forEach((house) => {
 					console.log(house.latitude, house.longitude, house.apartmentName);
 					this.drawPosition(house.latitude, house.longitude, house.apartmentName);
@@ -53,7 +58,7 @@
 				// "@/assets/ssafy_logo.png";
 
 				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(24, 35);
+				var imageSize = new kakao.maps.Size(24, 30);
 
 				// 마커 이미지를 생성합니다
 				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -84,7 +89,7 @@
 			//script 태그 객체 생성
 			/* eslint-disable */
 			if (!window.kakao || !window.kakao.maps) {
-				let serviceKey = "d141aeed5339bd04ba26793348816663";
+				let serviceKey = process.env.VUE_APP_KAKAOMAP_KEY;
 				let script0 = document.createElement("script");
 				script0.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${serviceKey}&libraries=LIBRARY
       &autoload=false`;

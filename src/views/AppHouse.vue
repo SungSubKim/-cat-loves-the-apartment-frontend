@@ -8,6 +8,11 @@
 		</b-row>
 		<b-row>
 			<b-col>
+				<house-map />
+			</b-col>
+		</b-row>
+		<b-row>
+			<b-col>
 				<house-search-bar></house-search-bar>
 			</b-col>
 		</b-row>
@@ -17,11 +22,6 @@
 			</b-col>
 			<b-col cols="6">
 				<house-detail />
-			</b-col>
-		</b-row>
-		<b-row>
-			<b-col>
-				<house-map />
 			</b-col>
 		</b-row>
 	</b-container>
