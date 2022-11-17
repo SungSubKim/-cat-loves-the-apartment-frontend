@@ -1,6 +1,6 @@
 <template>
-  <b-row class="mt-4 mb-4 text-center">
-    <!-- <b-col class="sm-3">
+	<b-row class="mt-4 mb-4 text-center">
+		<!-- <b-col class="sm-3">
       <b-form-input
         v-model.trim="dongCode"
         placeholder="동코드 입력...(예 : 11110)"
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+	import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HouseSearchBar",
