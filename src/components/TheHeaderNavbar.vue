@@ -42,6 +42,7 @@
 
 				<!-- Right aligned nav items -->
 				<b-navbar-nav class="ml-auto">
+					<b-nav-item v-if="userInfo.userid"> {{ userInfo.userid }}님, 반갑습니다! </b-nav-item>
 					<b-nav-item-dropdown right>
 						<template #button-content>
 							<b-icon icon="people" font-scale="2"></b-icon>
@@ -77,7 +78,7 @@
 		},
 		methods: {
 			logout() {
-				console.log("logout");
+				// console.log("logout");
 				this.$store.dispatch("userStore/logout");
 				if (this.$route.path !== "/") this.$router.push({ name: "main" });
 			},
