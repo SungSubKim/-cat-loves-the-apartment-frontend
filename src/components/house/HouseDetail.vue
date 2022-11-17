@@ -1,5 +1,6 @@
 <template>
 	<b-container v-if="house" class="bv-example-row">
+		{{ house }}
 		<b-row>
 			<b-col
 				><h3>{{ house.apartmentName }}</h3></b-col

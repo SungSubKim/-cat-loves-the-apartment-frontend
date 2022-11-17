@@ -117,31 +117,7 @@ export default new Vuex.Store({
 					console.log(error);
 				});
 		},
-		getHouseList({ commit }, gugunCode) {
-			// vue cli enviroment variables 검색
-			//.env.local file 생성.
-			// 반드시 VUE_APP으로 시작해야 한다.
-			// const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-			// const SERVICE_KEY =
-			//   "######################## Service Key ########################";
-			// const SERVICE_URL =
-			//   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-			// const params = {
-			//   LAWD_CD: gugunCode,
-			//   DEAL_YMD: "202207",
-			//   serviceKey: decodeURIComponent(SERVICE_KEY),
-			// };
-			// console.log("gugunCode");
-			// console.log(gugunCode);
-			// http
-			// 	.get(`/map/aptlist/${gugunCode}/${202207}`)
-			// 	.then(({ data }) => {
-			// 		// console.log(commit, data);
-			// 		commit("SET_HOUSE_LIST", data.response.body.items.item);
-			// 	})
-			// 	.catch((error) => {
-			// 		console.log(error);
-			// 	});
+		getHouseList({ commit }, { gugunCode }) {
 			http.get(`/housedeal/${gugunCode}`).then(({ data }) => {
 				// console.log(commit, data);
 				console.log("gugunCode22", gugunCode);
@@ -151,18 +127,18 @@ export default new Vuex.Store({
 			});
 		},
 		detailHouse({ commit }, house) {
-      console.log("아파트이름", house.아파트);
-     http
-        .get(`/map/image?aptName=${house.아파트}`)
-        .then(({ data }) => {
-          console.log(data);
-          house.imageUrl = data.imageUrl;
-          commit("SET_DETAIL_HOUSE", house);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+			console.log("아파트이름", house.apartmentName);
+			http
+				.get(`/map/image?aptName=${house.apartmentName}`)
+				.then(({ data }) => {
+					console.log(data);
+					house.imageUrl = data.imageUrl;
+					commit("SET_DETAIL_HOUSE", house);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		},
 		/////////////////////////////// House end /////////////////////////////////////
 
 		//////////////////////////// Todo List start //////////////////////////////////
