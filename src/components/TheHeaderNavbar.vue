@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<b-navbar toggleable="lg" style="background-color: (0, 0, 0, 0)">
+		<b-navbar toggleable="lg" >
 			<b-navbar-brand href="#">
 				<router-link :to="{ name: 'main' }">
 					<b-img
-						:src="require('@/assets/ssafy_logo.png')"
+						:src="require('@/assets/logo.png')"
 						id="logo"
 						class="d-inline-block align-top"
 						alt="logo"
@@ -14,26 +14,26 @@
 
 			<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-			<b-collapse id="nav-collapse" is-nav>
-				<b-navbar-nav>
-					<b-nav-item href="#">
-						<router-link :to="{ name: 'main' }" class="link">
+			<b-collapse id="nav-collapse " is-nav>
+				<b-navbar-nav class="iconRow ">
+					<b-nav-item href="#" class = "justify-content-center">
+						<router-link :to="{ name: 'main' }" class="link navBarIcon">
 							<b-icon icon="house-door" animation="spin" font-scale="2"></b-icon>
 							메인
 						</router-link>
-						<router-link :to="{ name: 'insta' }" class="m-2 link">
+						<router-link :to="{ name: 'insta' }" class="m-2 link navBarIcon">
 							<b-icon icon="instagram" animation="spin" font-scale="2"></b-icon>
 							인스타그램
 						</router-link>
-						<router-link :to="{ name: 'board' }" class="m-2 link">
+						<router-link :to="{ name: 'board' }" class="m-2 link navBarIcon">
 							<b-icon icon="journal" animation="spin-reverse" font-scale="2"></b-icon>
 							게시판
 						</router-link>
-						<router-link :to="{ name: 'house' }" class="m-2 link">
+						<router-link :to="{ name: 'house' }" class="m-2 link navBarIcon">
 							<b-icon icon="house-fill" animation="fade" font-scale="2"></b-icon>
 							아파트정보
 						</router-link>
-						<router-link :to="{ name: 'todo' }" class="link">
+						<router-link :to="{ name: 'todo' }" class="link navBarIcon">
 							<b-icon icon="calendar-check" animation="fade" font-scale="2"></b-icon>
 							TodoList
 						</router-link>
@@ -45,7 +45,7 @@
 					<b-nav-item v-if="userInfo.userid" style="margin-top: 10px; margin-right: 10px">
 						{{ userInfo.userid }}님, 반갑습니다!
 					</b-nav-item>
-					<b-nav-item-dropdown right>
+					<b-nav-item-dropdown right class = "navBarIcon">
 						<template #button-content>
 							<b-icon icon="people" font-scale="2"></b-icon>
 						</template>
@@ -87,7 +87,7 @@
 		},
 		data() {
 			return {
-				home_bg: require("@/assets/home-bg.jpg"),
+				home_bg: require("@/assets/bg2.jpg"),
 				variant: "light",
 				opacity: 0.3,
 				blur: "2px",
@@ -136,5 +136,11 @@
 
 	.link {
 		text-decoration: none;
+		/* color:#FFFFFF; */
+	}
+	.iconRow {
+		position:absolute;
+		left:50%;
+		transform: translateX(-50%);
 	}
 </style>
