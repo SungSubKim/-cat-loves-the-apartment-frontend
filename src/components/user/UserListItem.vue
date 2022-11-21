@@ -1,24 +1,38 @@
 <template>
-	<b-tr>
-		<b-tr v-if="!isModify">
-			<b-td> {{ username }}</b-td>
-			<b-th class="text-left">
+	<b-container class="bv-example-row">
+		<b-row v-if="!isModify">
+			<b-col class="bg-light p-2 text-left">
+				{{ username }}
+			</b-col>
+			<b-col class="bg-light p-2 w-20% text-left">
 				{{ userid }}
-			</b-th>
-			<b-td>{{ userpwd }}</b-td>
-			<b-td>{{ email }}</b-td>
-			<b-button variant="outline-primary" @click="viewModify">수정</b-button>
-			<b-button variant="outline-danger" @click="userDelete">삭제</b-button>
-		</b-tr>
-		<b-tr v-else>
-			<input type="text" v-model="username2" />
-			<input type="text" v-model="userid2" />
-			<input type="text" v-model="userpwd2" />
-			<input type="text" v-model="email2" />
-			<b-button variant="primary" @click="userModify">수정</b-button>
-			<b-button variant="danger" @click="closeModify">취소</b-button>
-		</b-tr>
-	</b-tr>
+			</b-col>
+			<b-col class="bg-light p-2 text-left">
+				{{ userpwd }}
+			</b-col>
+			<b-col class="bg-light p-2 text-left">
+				{{ email }}
+			</b-col>
+			<b-button class="m-2 bg-light" variant="outline-primary" @click="viewModify">수정</b-button>
+			<b-button class="m-2 bg-light" variant="outline-danger" @click="userDelete">삭제</b-button>
+		</b-row>
+		<b-row v-else>
+			<b-col class="bg-light p-2 text-left">
+				<input type="text" v-model="username2" />
+			</b-col>
+			<b-col class="bg-light p-2 text-left">
+				<input type="text" v-model="userid2" />
+			</b-col>
+			<b-col class="bg-light p-2 text-left">
+				<input type="text" v-model="userpwd2" />
+			</b-col>
+			<b-col class="bg-light p-2 text-left">
+				<input type="text" v-model="email2" />
+			</b-col>
+			<b-button class="m-2 bg-light" variant="primary" @click="userModify">수정</b-button>
+			<b-button class="m-2 bg-light" variant="danger" @click="closeModify">취소</b-button>
+		</b-row>
+	</b-container>
 </template>
 
 <script>
