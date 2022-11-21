@@ -42,7 +42,9 @@
 
 				<!-- Right aligned nav items -->
 				<b-navbar-nav class="ml-auto">
-					<b-nav-item v-if="userInfo.userid" style="margin-top: 10px;margin-right: 10px;"> {{ userInfo.userid }}님, 반갑습니다! </b-nav-item>
+					<b-nav-item v-if="userInfo.userid" style="margin-top: 10px; margin-right: 10px">
+						{{ userInfo.userid }}님, 반갑습니다!
+					</b-nav-item>
 					<b-nav-item-dropdown right>
 						<template #button-content>
 							<b-icon icon="people" font-scale="2"></b-icon>
@@ -58,6 +60,9 @@
 
 						<b-dropdown-item href="#" class="link" @click="logout" v-else>
 							<b-icon icon="key"></b-icon> 로그아웃
+						</b-dropdown-item>
+						<b-dropdown-item href="#" class="link" @click="userManager" v-if="userInfo.userid == 'admin'">
+							<b-icon icon="key"></b-icon> 유저 관리
 						</b-dropdown-item>
 					</b-nav-item-dropdown>
 				</b-navbar-nav>
@@ -81,6 +86,9 @@
 				// console.log("logout");
 				this.$store.dispatch("userStore/logout");
 				if (this.$route.path !== "/") this.$router.push({ name: "main" });
+			},
+			userManager() {
+				this.$router.push({ name: "userList" });
 			},
 		},
 	};

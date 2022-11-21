@@ -144,6 +144,7 @@
 			},
 			registUser() {
 				console.log("registUser");
+				console.log(this.userInfo);
 				http.post(`/user/join`, this.userInfo).then(({ data }) => {
 					let msg = "등록 처리시 문제가 발생했습니다.";
 					if (data === "success") {

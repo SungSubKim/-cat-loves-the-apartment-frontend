@@ -29,6 +29,18 @@ const routes = [
 		component: () => import("@/views/AppTodo"),
 	},
 	{
+		path: "/admin",
+		name: "admin",
+		component: () => import("@/views/AppAdmin"),
+		children: [
+			{
+				path: "list",
+				name: "userList",
+				component: () => import("@/components/user/UserList"),
+			},
+		],
+	},
+	{
 		path: "/user",
 		name: "user",
 		component: () => import("@/views/AppUser"),
