@@ -55,6 +55,12 @@ const routes = [
 				name: "login",
 				component: () => import("@/components/user/UserLogin"),
 			},
+			{
+				path: "mypage",
+				name: "mypage",
+				component: () => import("@/components/user/UserMypage"),
+				props:true,
+			},
 		],
 	},
 	{

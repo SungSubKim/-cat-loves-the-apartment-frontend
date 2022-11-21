@@ -3,7 +3,7 @@
     <div class="user-image">
         <img :src="require('@/assets/empty_apart.png')"/>
     </div>
-    <div class="user-text"  :class="aptName.length>10?'long-text':'short-text'" >
+    <div class="user-text"  :class="aptName.length>5?'long-text':'short-text'" >
         <p>{{aptName|process}}</p>
     </div>
 </div>
@@ -40,11 +40,10 @@ export default {
 
 .user-text {
     position: absolute;
-    top: 50%;
-    left: 10%;
+    top: 40%;
+    left: -40%;
     width: 100%;
-    transform: translate(-50%, -50%);
-    /* font-size: 23px; */
+    /* transform: translate(-50%, -50%); */
     font-family: 'ypseo';
     text-align: center;
     writing-mode: vertical-rl;
@@ -52,7 +51,7 @@ export default {
 }
 
 .long-text{
-    font-size:10px;
+    font-size:15px;
 }
 .short-text{
     font-size:25px;

@@ -58,7 +58,7 @@
 			async confirm() {
 				try {
 					await this.$store.dispatch("userStore/login", this.user);
-					alert("로그인성공!!!");
+					// alert("로그인성공!!!");
 					this.$router.push({ name: "main" });
 				} catch (err) {
 					alert("로그인실패!!!");

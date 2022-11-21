@@ -61,6 +61,12 @@
 						<b-dropdown-item href="#" class="link" @click="logout" v-else>
 							<b-icon icon="key"></b-icon> 로그아웃
 						</b-dropdown-item>
+
+						<b-dropdown-item href="#">
+							<router-link :to="{name:'mypage', params:{userId:userInfo.userid}}" class="link"><b-icon icon="people-fill"></b-icon> 마이페이지</router-link>
+							
+						</b-dropdown-item>
+
 						<b-dropdown-item href="#" class="link" @click="userManager" v-if="userInfo.userid == 'admin'">
 							<b-icon icon="key"></b-icon> 유저 관리
 						</b-dropdown-item>
