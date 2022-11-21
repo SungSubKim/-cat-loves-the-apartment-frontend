@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-navbar toggleable="lg" type="dark" variant="dark">
+		<b-navbar toggleable="lg" style="background-color: (0, 0, 0, 0)">
 			<b-navbar-brand href="#">
 				<router-link :to="{ name: 'main' }">
 					<b-img
@@ -74,6 +74,7 @@
 				</b-navbar-nav>
 			</b-collapse>
 		</b-navbar>
+		<img id="header-bg" style="width: 100%" :src="home_bg" />
 	</div>
 </template>
 
@@ -85,7 +86,25 @@
 			...mapState("userStore", ["userInfo"]),
 		},
 		data() {
-			return {};
+			return {
+				home_bg: require("@/assets/home-bg.jpg"),
+				variant: "light",
+				opacity: 0.3,
+				blur: "2px",
+				variants: [
+					"transparent",
+					"white",
+					"light",
+					"dark",
+					"primary",
+					"secondary",
+					"success",
+					"danger",
+					"warning",
+					"info",
+				],
+				blurs: [{ text: "None", value: "" }, "1px", "2px", "5px", "0.5em", "1rem"],
+			};
 		},
 		methods: {
 			logout() {
@@ -101,6 +120,16 @@
 </script>
 
 <style scoped>
+	#header-bg {
+		position: absolute;
+		top: -30%;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: brightness(50%);
+		clip: rect(0px, 3000px, 900px, 0px);
+	}
 	#logo {
 		width: 120px;
 	}

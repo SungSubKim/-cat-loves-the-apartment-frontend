@@ -1,12 +1,16 @@
 <template>
-	<b-container v-if="users && users.length != 0" class="bv-example-row mt-3">
-		<user-list-item
-			v-for="user in users"
-			:key="user.userid"
-			v-bind="user"
-			@userModify="userListModify"
-			@userDelete="userListDelete"
-		/>
+	<b-container v-if="users && users.length != 0" class="bv-example-row">
+		<b-row class="mt-4 mb-4 text-center">
+			<b-col>
+				<user-list-item
+					v-for="user in users"
+					:key="user.userid"
+					v-bind="user"
+					@userModify="userListModify"
+					@userDelete="userListDelete"
+				/>
+			</b-col>
+		</b-row>
 	</b-container>
 	<b-container v-else class="bv-example mt-3">
 		<b-row>
