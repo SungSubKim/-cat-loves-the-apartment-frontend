@@ -6,7 +6,8 @@
 			>
 		</b-row>
 		<b-row class="mb-2 mt-1">
-			<b-col><b-img :src="house.imageUrl" fluid-grow></b-img></b-col>
+			<house-image :aptName="house.apartmentName"></house-image>
+			<!-- <b-col><b-img :src="house.imageUrl" fluid-grow></b-img></b-col> -->
 			<!-- <b-col><b-img :src="require('@/assets/apt.png')" fluid-grow></b-img></b-col> -->
 		</b-row>
 		<b-row>
@@ -41,8 +42,15 @@
 
 <script>
 	import { mapState } from "vuex";
-
-	export default {
+	import HouseImage from "@/components/house/HouseImage.vue"
+	
+export default {
+	components:
+	{
+		HouseImage
+	}
+	
+	,
 		name: "HouseDetail",
 		computed: {
 			...mapState(["house","randomImgUrl"]),
