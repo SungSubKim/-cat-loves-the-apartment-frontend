@@ -1,7 +1,24 @@
 <template>
 	<b-container v-if="users && users.length != 0" class="bv-example-row">
-		<b-row class="mt-4 mb-4 text-center">
-			<b-col>
+		<div id="searchbar">
+			<b-button class="float-right ml-2" variant="primary" @click="searchUser">검색</b-button>
+			<input type="text" v-model="search" id="searchbarInput" class="float-right m-1" />
+			<select v-model="selected" class="float-right m-2">
+				<option>사용자명</option>
+				<option>아이디</option>
+				<option>이메일</option>
+			</select>
+		</div>
+		<b-table-simple hover responsive>
+			<tbody>
+				<b-tr>
+					<b-th class="text-center p-2 bg-light">사용자명</b-th>
+					<b-th class="text-center p-2 bg-light">아이디</b-th>
+					<b-th class="text-center p-2 bg-light">비밀번호</b-th>
+					<b-th class="text-center p-2 bg-light">이메일</b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 6%"> </b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 6%"> </b-th>
+				</b-tr>
 				<user-list-item
 					v-for="user in users"
 					:key="user.userid"
@@ -9,8 +26,13 @@
 					@userModify="userListModify"
 					@userDelete="userListDelete"
 				/>
-			</b-col>
-		</b-row>
+			</tbody>
+		</b-table-simple>
+
+		<!-- <tbody></tbody>
+		<b-row class="mt-4 mb-4 text-center">
+			<b-col> </b-col>
+		</b-row> -->
 	</b-container>
 	<b-container v-else class="bv-example mt-3">
 		<b-row>
@@ -31,6 +53,8 @@
 		data() {
 			return {
 				users: [],
+				search: [],
+				selected: "",
 			};
 		},
 		created() {
@@ -53,8 +77,35 @@
 					return user.userid != userid;
 				});
 			},
+			searchUser() {
+				console.log(this.selected);
+				if (this.selected == "") {
+					alert("검색 조건을 선택해주세요.");
+					return;
+				}
+				http
+					.get(`/admin/searchUser`, {
+						params: {
+							selected: this.selected,
+							search: this.search,
+						},
+					})
+					.then(({ data }) => {
+						console.log(data);
+						if (data.length > 0) this.users = data;
+						else alert("해당하는 결과가 없음");
+					});
+			},
 		},
 	};
 </script>
 
-<style></style>
+<style>
+	#searchbar {
+		display: inline-block;
+		width: 100%;
+	}
+	#searchbarInput {
+		border-radius: 3px;
+	}
+</style>
