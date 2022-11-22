@@ -1,29 +1,32 @@
 <template>
 	<b-container class="bv-example-row mt-3 text-center">
-		<h3 class="underline-orange"><b-icon icon="house-fill"></b-icon> House Service</h3>
-		<b-row>
+		<h1 ><b-icon variant="primary" icon="house-fill"></b-icon> </h1>
+		<!-- <b-row>
 			<b-col>
 				<b-img style="width: 70%; padding: 10px" alt="Happy House" :src="require('@/assets/house.jpg')" />
 			</b-col>
-		</b-row>
+		</b-row> -->
 		<b-row>
-			<b-col>
-				<house-map />
-			</b-col>
+			
 		</b-row>
 		<b-row>
 			<b-col>
 				<house-search-bar></house-search-bar>
 			</b-col>
 		</b-row>
+
 		<b-row>
-			<b-col cols="6" align="left">
+			<b-col cols="4" align="left">
 				<house-list />
 			</b-col>
-			<b-col cols="6">
+			<b-col cols="4">
 				<house-detail />
 			</b-col>
+			<b-col cols="4">
+				<house-map />
+			</b-col>
 		</b-row>
+		
 	</b-container>
 </template>
 <script>
