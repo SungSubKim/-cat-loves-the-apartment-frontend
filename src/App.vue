@@ -2,6 +2,7 @@
   <div id="app">
     <the-header-navbar></the-header-navbar>
     <router-view></router-view>
+    
   </div>
 </template>
 
@@ -24,9 +25,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-.navBarIcon {
+/* .navBarIcon {
   color:#FFFFFF;
-}
+} */
 /* a.router-link-active {
   color:#FFFFFF;
 } */
@@ -38,4 +39,5 @@ a.router-link-exact-active{
 a.router-link-exact-active:hover {
   text-decoration: none;
 }
+
 </style>

@@ -42,7 +42,7 @@
 
 <script>
 	import { mapState } from "vuex";
-	import HouseImage from "@/components/house/HouseImage.vue"
+	import HouseImage from "@/components/house/HouseDetailImage.vue"
 	
 export default {
 	components:

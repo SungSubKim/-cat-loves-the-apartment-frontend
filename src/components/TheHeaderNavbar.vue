@@ -13,42 +13,44 @@
 				<b-navbar-nav class="iconRow">
 					<b-nav-item href="#" class="justify-content-center">
 						<router-link :to="{ name: 'main' }" class="m-1 p-2 link navBarIcon">
-							<b-icon icon="house-door" animation="spin" font-scale="2"></b-icon>
+							<b-icon icon="house-door" variant="primary" animation="spin-reverse" font-scale="2"></b-icon>
 							메인
 						</router-link>
 						<router-link :to="{ name: 'insta' }" class="m-1 p-2 link navBarIcon">
-							<b-icon icon="instagram" animation="spin" font-scale="2"></b-icon>
+							<b-img thumbnail fluid rounded :src="$store.state.randomImgUrl" style="width:50px;height:50px;border-radius: 20px"/>
+							<!-- <b-icon :src="$store.state.randomImgUrl" variant="primary" animation="spin" font-scale="2"></b-icon> -->
 							인스타그램
 						</router-link>
 						<router-link :to="{ name: 'board' }" class="m-1 p-2 link navBarIcon">
-							<b-icon icon="journal" animation="spin-reverse" font-scale="2"></b-icon>
+							<b-icon icon="journal" variant="primary" animation="spin-reverse" font-scale="2"></b-icon>
 							게시판
 						</router-link>
 						<router-link :to="{ name: 'house' }" class="m-1 p-2 link navBarIcon">
-							<b-icon icon="house-fill" animation="fade" font-scale="2"></b-icon>
+							<b-icon icon="house-fill" variant="primary" animation="fade" font-scale="2"></b-icon>
 							아파트정보
 						</router-link>
-						<router-link :to="{ name: 'todo' }" class="link m-1 p-2 navBarIcon">
+						<!-- <router-link :to="{ name: 'todo' }" class="link m-1 p-2 navBarIcon">
 							<b-icon icon="calendar-check" animation="fade" font-scale="2"></b-icon>
 							TodoList
-						</router-link>
+						</router-link> -->
 					</b-nav-item>
 				</b-navbar-nav>
 
 				<!-- Right aligned nav items -->
-				<b-navbar-nav class="ml-auto">
+				<b-navbar-nav class="ml-auto" >
 					<b-nav-item v-if="userInfo.userid" style="margin-top: 10px; margin-right: 10px">
 						{{ userInfo.userid }}님, 반갑습니다!
 					</b-nav-item>
-					<b-nav-item-dropdown right class="navBarIcon">
-						<template #button-content>
-							<b-icon icon="people" font-scale="2"></b-icon>
+					<b-nav-item-dropdown right class="navBarIcon" variant="primary">
+						<template #button-content  >
+							<b-icon  variant="primary" icon="people" font-scale="2"></b-icon>
 						</template>
-						<b-dropdown-item href="#">
+						<b-dropdown-item  href="#">
 							<router-link :to="{ name: 'join' }" class="link">
 								<b-icon icon="person-circle"></b-icon> 회원가입
 							</router-link>
 						</b-dropdown-item>
+
 						<b-dropdown-item href="#" v-if="!userInfo.userid">
 							<router-link :to="{ name: 'login' }" class="link"> <b-icon icon="key"></b-icon> 로그인 </router-link>
 						</b-dropdown-item>
@@ -59,24 +61,29 @@
 
 						<b-dropdown-item href="#">
 							<router-link :to="{ name: 'mypage', params: { userId: userInfo.userid } }" class="link"
-								><b-icon icon="people-fill"></b-icon> 마이페이지</router-link
+								><b-icon variant="primary" icon="people-fill"></b-icon> 마이페이지</router-link
 							>
 						</b-dropdown-item>
 
 						<b-dropdown-item href="#" class="link" @click="userManager" v-if="userInfo.userid == 'admin'">
 							<b-icon icon="key"></b-icon> 유저 관리
 						</b-dropdown-item>
+
 					</b-nav-item-dropdown>
 				</b-navbar-nav>
 			</b-collapse>
 		</b-navbar>
-		<img id="header-bg" style="width: 100%" :src="home_bg" />
+		
 	</div>
 </template>
 
 <script>
+	import { mapActions } from "vuex";
 	import { mapState } from "vuex";
-	export default {
+export default {
+	created() {
+		this.getRandomImgUrl();	
+	},
 		name: "TheHeaderNavbar",
 		computed: {
 			...mapState("userStore", ["userInfo"]),
@@ -102,7 +109,8 @@
 				blurs: [{ text: "None", value: "" }, "1px", "2px", "5px", "0.5em", "1rem"],
 			};
 		},
-		methods: {
+	methods: {
+			...mapActions(["getRandomImgUrl"]),
 			logout() {
 				// console.log("logout");
 				this.$store.dispatch("userStore/logout");
@@ -116,16 +124,7 @@
 </script>
 
 <style scoped>
-	#header-bg {
-		position: absolute;
-		top: -30%;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		filter: brightness(50%);
-		clip: rect(0px, 3000px, 900px, 0px);
-	}
+	
 	#logo {
 		width: 120px;
 	}

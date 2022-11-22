@@ -6,10 +6,10 @@
 		@mouseout="colorChange(false)"
 		:class="{ 'mouse-over-bgcolor': isColor }"
 	>
-		<b-col cols="2" class="text-center align-self-center">
-			<b-img thumbnail :src="randomImgUrl" alt="Image 1"></b-img>
+		<b-col cols="4" class="text-center align-self-center">
+			<b-img thumbnail :src="require(`@/assets/apt${idx%3+1}.png`)" ></b-img>
 		</b-col>
-		<b-col cols="10" class="align-self-center"> [{{ house.apartmentCode }}] {{ house.apartmentName }} </b-col>
+		<b-col cols="8" class="align-self-center">[{{ idx + 1 }}] {{ house.apartmentName }} </b-col>
 	</b-row>
 </template>
 
@@ -25,7 +25,9 @@ import { mapState } from "vuex";
 			};
 		},
 		props: {
-			house: Object,
+		
+			house:Object, idx: String,
+		
 		},
 		methods: {
 			...mapActions(["detailHouse"]),

@@ -29,7 +29,10 @@
 									placeholder="아이디..."
 								/>
 							</b-form-group>
+
 							<div id="idcheck-result"></div>
+
+							
 							<b-form-group label="비밀번호: " label-for="userpwd" description="비밀번호를 입력하세요">
 								<b-form-input
 									class="form-control"
@@ -46,6 +49,7 @@
 							>
 								<b-form-input class="form-control" v-model="pwdcheck" type="password" placeholder="비밀번호 확인..." />
 							</b-form-group>
+
 							<b-form-group label="이메일: " label-for="email" description="이메일을 입력하세요">
 								<b-form-input
 									class="form-control"
