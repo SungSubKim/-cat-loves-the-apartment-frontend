@@ -1,41 +1,27 @@
 <template>
-  <b-container class="mt-3">
+	<b-container class="mt-3">
 		<b-row text-center>
 			<b-col>
-				<b-alert variant="secondary" show><h3>마이페이지{{userInfo}}</h3></b-alert>
+				<b-alert variant="secondary" show><h3>마이페이지</h3></b-alert>
 			</b-col>
 		</b-row>
 
-        <b-row>
+		<b-row>
 			<b-container class="text-left">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 col-md-10 col-sm-12">
 						<b-form>
 							<b-form-group label="이름: ">
-								<b-form-input
-									class="form-control"
-									type="text"
-									v-model="userInfo.username"
-								/>
+								<b-form-input class="form-control" type="text" v-model="userInfo.username" />
 							</b-form-group>
 							<b-form-group label="아이디: " label-for="userid">
-								<b-form-input
-									class="form-control"
-									id="userid"
-									type="text"
-									v-model="userInfo.userid"
-								/>
+								<b-form-input class="form-control" id="userid" type="text" v-model="userInfo.userid" readonly />
 							</b-form-group>
 							<b-form-group label="이메일: " label-for="email">
-								<b-form-input
-									class="form-control"
-									id="email"
-									type="email"
-									v-model="userInfo.email"
-								/>
+								<b-form-input class="form-control" id="email" type="email" v-model="userInfo.email" />
 							</b-form-group>
 
-                            <b-form-group label="비밀번호: " label-for="userpwd" description="비밀번호변경을 원하시면 입력하세요">
+							<b-form-group label="비밀번호: " label-for="userpwd" description="비밀번호변경을 원하시면 입력하세요">
 								<b-form-input
 									class="form-control"
 									id="userPwd"
@@ -49,9 +35,14 @@
 								label-for="userPasswordConfirm"
 								description="비밀번호를 다시 입력하세요"
 							>
-								<b-form-input class="form-control" type="password" v-model="changePwd2" placeholder="비밀번호 확인..." />
+								<b-form-input
+									class="form-control"
+									type="password"
+									v-model="changePwd2"
+									placeholder="비밀번호 확인..."
+								/>
 							</b-form-group>
-                            
+
 							<div class="col-auto text-center">
 								<b-button @click="modify" variant="primary" class="m-1">회원정보 수정</b-button>
 								<b-button @click="initPwd" variant="danger" class="m-1">비밀번호 초기화</b-button>
@@ -65,64 +56,60 @@
 </template>
 
 <script>
-import http from "@/api/http"
-export default {
-    created() {
-        http.get('/user/' + this.$route.params.userId).then((result) => {
-            console.log(this.$route.params.userId, result.data);
-            this.userInfo = result.data.userInfo;
-        }
-        )
-    },
-    data() {
-        return {
-            userInfo: {},
-            changePwd: "",
-            changePwd2:"",
-        }
-    },
-    methods: {
-        modify(){
-            console.log("modify")
-            if (this.changePwd && this.changePwd === this.changePwd2) {
-                this.userInfo.userpwd = this.changePwd;
-            }
-            http
-                .put("/admin/user",this.userInfo)
-                .then(this.goMain());
-        },
-        goMain() {
-            this.$router.push({ name: 'main' });
-        },
-        initPwd() {
-            console.log("initPassword")
+	import http from "@/api/http";
+	export default {
+		created() {
+			http.get("/user/" + this.$route.params.userId).then((result) => {
+				console.log(this.$route.params.userId, result.data);
+				this.userInfo = result.data.userInfo;
+			});
+		},
+		data() {
+			return {
+				userInfo: {},
+				changePwd: "",
+				changePwd2: "",
+			};
+		},
+		methods: {
+			modify() {
+				console.log("modify");
+				if (this.changePwd && this.changePwd === this.changePwd2) {
+					this.userInfo.userpwd = this.changePwd;
+				}
+				http.put("/admin/user", this.userInfo).then(this.goMain());
+			},
+			goMain() {
+				this.$router.push({ name: "main" });
+			},
+			initPwd() {
+				console.log("initPassword");
 
-            let specialChars = ['!', '@', '#', '$', '%', '^', '&', '*'];
-            let idx1 = Math.floor(Math.random() * specialChars.length);
-            let idx2 = Math.floor(Math.random() * specialChars.length);
-            // 랜덤 비밀번호 생성
-            const initalizedPwd = Math.random().toString(36).substring(2, 10) + specialChars[idx1] + specialChars[idx2];
-            console.log(initalizedPwd);
-            console.log(this.userInfo.email);
+				let specialChars = ["!", "@", "#", "$", "%", "^", "&", "*"];
+				let idx1 = Math.floor(Math.random() * specialChars.length);
+				let idx2 = Math.floor(Math.random() * specialChars.length);
+				// 랜덤 비밀번호 생성
+				const initalizedPwd = Math.random().toString(36).substring(2, 10) + specialChars[idx1] + specialChars[idx2];
+				console.log(initalizedPwd);
+				console.log(this.userInfo.email);
 
-            // 입력되어있는 메일로 보내기
-            const param = {
-                email : this.userInfo.email , initializePwd: initalizedPwd
-            };
-            console.log(param);
-            http.post("/user/init-pwd", param).then((result) => console.log(result));
-            
-            // modfiy하기
-            this.userInfo.userpwd = initalizedPwd;
-            this.modify();
+				// 입력되어있는 메일로 보내기
+				const param = {
+					email: this.userInfo.email,
+					initializePwd: initalizedPwd,
+				};
+				console.log(param);
+				http.post("/user/init-pwd", param).then((result) => console.log(result));
 
-            // // 로그아웃 후 메인으로 보내기
-            // this.goMain();
-        }
-    }
-}
+				// modfiy하기
+				this.userInfo.userpwd = initalizedPwd;
+				this.modify();
+
+				// // 로그아웃 후 메인으로 보내기
+				// this.goMain();
+			},
+		},
+	};
 </script>
 
-<style>
-
-</style>
+<style></style>

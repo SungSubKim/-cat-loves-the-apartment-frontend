@@ -12,10 +12,10 @@
 		<b-table-simple hover responsive>
 			<tbody>
 				<b-tr>
-					<b-th class="text-center p-2 bg-light">사용자명</b-th>
-					<b-th class="text-center p-2 bg-light">아이디</b-th>
-					<b-th class="text-center p-2 bg-light">비밀번호</b-th>
-					<b-th class="text-center p-2 bg-light">이메일</b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 15%">사용자명</b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 15%">아이디</b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 15%">비밀번호</b-th>
+					<b-th class="text-center p-2 bg-light" style="width: 15%">이메일</b-th>
 					<b-th class="text-center p-2 bg-light" style="width: 6%"> </b-th>
 					<b-th class="text-center p-2 bg-light" style="width: 6%"> </b-th>
 				</b-tr>

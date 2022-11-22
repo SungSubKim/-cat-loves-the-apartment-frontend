@@ -1,16 +1,16 @@
 <template>
 	<!-- <b-container class="bv-example-row"> -->
 	<b-tr v-if="!isModify" class="myrow">
-		<b-th class="bg-light text-center">
+		<b-td class="bg-light p-2">
 			{{ username }}
-		</b-th>
-		<b-th class="bg-light text-center">
+		</b-td>
+		<b-td class="bg-light p-2">
 			{{ userid }}
-		</b-th>
-		<b-th class="bg-light text-center">
+		</b-td>
+		<b-th class="bg-light p-2">
 			{{ userpwd }}
 		</b-th>
-		<b-th class="bg-light text-center">
+		<b-th class="bg-light p-2">
 			{{ email }}
 		</b-th>
 		<b-th class="bg-light pl-0 pr-0 pt-auto text-center">
@@ -20,22 +20,26 @@
 			<b-button class="bg-light" variant="outline-danger" @click="userDelete">삭제</b-button>
 		</b-th>
 	</b-tr>
-	<b-row v-else class="myrow">
-		<b-th class="bg-light text-center">
+	<b-tr v-else class="myrow">
+		<b-th class="bg-light p-2 text-center">
 			<input type="text" v-model="username2" />
 		</b-th>
-		<b-th class="bg-light text-center">
+		<b-th class="bg-light p-2 text-center">
 			<input type="text" v-model="userid2" />
 		</b-th>
-		<b-th class="bg-light text-center">
+		<b-th class="bg-light p-2 text-center">
 			<input type="text" v-model="userpwd2" />
 		</b-th>
-		<b-th class="bg-light text-center">
+		<b-th class="bg-light p-2 text-center">
 			<input type="text" v-model="email2" />
 		</b-th>
-		<b-button class="bg-light p-1" variant="primary" @click="userModify">수정</b-button>
-		<b-button class="bg-light p-1" variant="danger" @click="closeModify">취소</b-button>
-	</b-row>
+		<b-th class="bg-light pl-0 pr-0 pt-auto text-center">
+			<b-button class="bg-light" variant="primary" @click="userModify">수정</b-button>
+		</b-th>
+		<b-th class="bg-light pl-0 pr-0 pt-auto text-center">
+			<b-button class="bg-light" variant="danger" @click="closeModify">취소</b-button>
+		</b-th>
+	</b-tr>
 	<!-- </b-container> -->
 </template>
 
@@ -110,7 +114,8 @@
 	.p-2 {
 		border-radius: 6px;
 	}
-	.text-center {
+	.bg-light {
 		font-weight: normal;
+		text-align: left;
 	}
 </style>
