@@ -57,7 +57,7 @@
 				var map = this.map;
 				// console.log("drawPosition");
 				// 마커 이미지의 이미지 주소입니다
-				var imageSrc = require("@/assets/marker.png");
+				var imageSrc = require("@/assets/red_marker.png");
 				// console.log(imageSrc);
 				// "@/assets/ssafy_logo.png";
 
@@ -81,12 +81,12 @@
 					iwPosition = new kakao.maps.LatLng(latitude, longitude); //인포윈도우 표시 위치입니다
 
 				// 인포윈도우를 생성합니다
-				var infowindow = new kakao.maps.InfoWindow({
-					position: iwPosition,
-					content: iwContent,
-				});
+				// var infowindow = new kakao.maps.InfoWindow({
+				// position: iwPosition,
+				// content: iwContent,
+				// });
 				// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-				infowindow.open(map, marker);
+				// infowindow.open(map, marker);
 			},
 		},
 		mounted() {
