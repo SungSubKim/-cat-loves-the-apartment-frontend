@@ -1,38 +1,42 @@
 <template>
-	<b-container class="bv-example-row">
-		<b-row v-if="!isModify">
-			<b-col class="bg-light p-2 text-left">
-				{{ username }}
-			</b-col>
-			<b-col class="bg-light p-2 w-20% text-left">
-				{{ userid }}
-			</b-col>
-			<b-col class="bg-light p-2 text-left">
-				{{ userpwd }}
-			</b-col>
-			<b-col class="bg-light p-2 text-left">
-				{{ email }}
-			</b-col>
-			<b-button class="m-2 bg-light" variant="outline-primary" @click="viewModify">수정</b-button>
-			<b-button class="m-2 bg-light" variant="outline-danger" @click="userDelete">삭제</b-button>
-		</b-row>
-		<b-row v-else>
-			<b-col class="bg-light p-2 text-left">
-				<input type="text" v-model="username2" />
-			</b-col>
-			<b-col class="bg-light p-2 text-left">
-				<input type="text" v-model="userid2" />
-			</b-col>
-			<b-col class="bg-light p-2 text-left">
-				<input type="text" v-model="userpwd2" />
-			</b-col>
-			<b-col class="bg-light p-2 text-left">
-				<input type="text" v-model="email2" />
-			</b-col>
-			<b-button class="m-2 bg-light" variant="primary" @click="userModify">수정</b-button>
-			<b-button class="m-2 bg-light" variant="danger" @click="closeModify">취소</b-button>
-		</b-row>
-	</b-container>
+	<!-- <b-container class="bv-example-row"> -->
+	<b-tr v-if="!isModify" class="myrow">
+		<b-th class="bg-light text-center">
+			{{ username }}
+		</b-th>
+		<b-th class="bg-light text-center">
+			{{ userid }}
+		</b-th>
+		<b-th class="bg-light text-center">
+			{{ userpwd }}
+		</b-th>
+		<b-th class="bg-light text-center">
+			{{ email }}
+		</b-th>
+		<b-th class="bg-light pl-0 pr-0 pt-auto text-center">
+			<b-button class="bg-light" variant="outline-primary" @click="viewModify">수정</b-button>
+		</b-th>
+		<b-th class="bg-light pl-0 pr-0 pt-auto text-center">
+			<b-button class="bg-light" variant="outline-danger" @click="userDelete">삭제</b-button>
+		</b-th>
+	</b-tr>
+	<b-row v-else class="myrow">
+		<b-th class="bg-light text-center">
+			<input type="text" v-model="username2" />
+		</b-th>
+		<b-th class="bg-light text-center">
+			<input type="text" v-model="userid2" />
+		</b-th>
+		<b-th class="bg-light text-center">
+			<input type="text" v-model="userpwd2" />
+		</b-th>
+		<b-th class="bg-light text-center">
+			<input type="text" v-model="email2" />
+		</b-th>
+		<b-button class="bg-light p-1" variant="primary" @click="userModify">수정</b-button>
+		<b-button class="bg-light p-1" variant="danger" @click="closeModify">취소</b-button>
+	</b-row>
+	<!-- </b-container> -->
 </template>
 
 <script>
@@ -102,4 +106,11 @@
 	};
 </script>
 
-<style></style>
+<style scoped>
+	.p-2 {
+		border-radius: 6px;
+	}
+	.text-center {
+		font-weight: normal;
+	}
+</style>
