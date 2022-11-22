@@ -24,8 +24,14 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.navBarIcon {
+  color:#FFFFFF;
+}
+/* a.router-link-active {
+  color:#FFFFFF;
+} */
 
-a.router-link-exact-active {
+a.router-link-exact-active{
   color: #89bfef;
 }
 
