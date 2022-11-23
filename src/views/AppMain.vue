@@ -25,7 +25,7 @@
 			width: 100%;
 			height: 100%;
 			z-index: -1;
-			filter: brightness(50%);
+			/* filter: brightness(50%); */
 			clip: rect(0px, 5000px, 900px, 0px);
 		}
 </style>
