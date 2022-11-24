@@ -61,6 +61,12 @@ const routes = [
 				component: () => import("@/components/user/UserMypage"),
 				props: true,
 			},
+			{
+				path: "init-pass",
+				name: "init-pass",
+				component: () => import("@/components/user/UserInitPass"),
+				props: true,
+			},
 		],
 	},
 	{

@@ -45,7 +45,7 @@
 
 							<div class="col-auto text-center">
 								<b-button @click="modify" variant="primary" class="m-1">회원정보 수정</b-button>
-								<b-button @click="initPwd" variant="danger" class="m-1">비밀번호 초기화</b-button>
+								<b-button @click="initPwd" variant="danger" class="m-1" disabled>비밀번호 초기화</b-button>
 							</div>
 						</b-form>
 					</div>
@@ -82,32 +82,7 @@
 			goMain() {
 				this.$router.push({ name: "main" });
 			},
-			initPwd() {
-				console.log("initPassword");
-
-				let specialChars = ["!", "@", "#", "$", "%", "^", "&", "*"];
-				let idx1 = Math.floor(Math.random() * specialChars.length);
-				let idx2 = Math.floor(Math.random() * specialChars.length);
-				// 랜덤 비밀번호 생성
-				const initalizedPwd = Math.random().toString(36).substring(2, 10) + specialChars[idx1] + specialChars[idx2];
-				console.log(initalizedPwd);
-				console.log(this.userInfo.email);
-
-				// 입력되어있는 메일로 보내기
-				const param = {
-					email: this.userInfo.email,
-					initializePwd: initalizedPwd,
-				};
-				console.log(param);
-				http.post("/user/init-pwd", param).then((result) => console.log(result));
-
-				// modfiy하기
-				this.userInfo.userpwd = initalizedPwd;
-				this.modify();
-
-				// // 로그아웃 후 메인으로 보내기
-				// this.goMain();
-			},
+			
 		},
 	};
 </script>
