@@ -25,7 +25,7 @@
 		color: #2c3e50;
 	}
 	.navBarIcon {
-		color: #ffffff;
+		color: black;
 	}
 	/* a.router-link-active {
   color:#FFFFFF;
@@ -38,6 +38,6 @@
 	/* a.router-link-exact-active:hover { */
 	.navBarIcon:hover {
 		/* text-decoration: none; */
-		color: blue;
+		color: red;
 	}
 </style>
