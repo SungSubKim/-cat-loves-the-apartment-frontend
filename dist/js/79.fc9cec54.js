@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkboard_housedeal_todolist"]=self["webpackChunkboard_housedeal_todolist"]||[]).push([[79],{2079:function(e,t,n){n.r(t),n.d(t,{default:function(){return i}});var r=function(){var e=this,t=e._self._c;return t("b-container",{staticClass:"bv-example-row mt-3 text-center"},[t("h3",{staticClass:"underline-hotpink"},[t("b-icon",{attrs:{icon:"journals"}}),e._v(" Board Service")],1),t("router-view")],1)},o=[],a={name:"AppBoard"},s=a,l=n(1001),u=(0,l.Z)(s,r,o,!1,null,"3203bb0e",null),i=u.exports}}]);
+//# sourceMappingURL=79.fc9cec54.js.map

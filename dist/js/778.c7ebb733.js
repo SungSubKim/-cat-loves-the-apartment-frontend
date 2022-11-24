@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkboard_housedeal_todolist"]=self["webpackChunkboard_housedeal_todolist"]||[]).push([[778],{5778:function(e,t,n){n.r(t),n.d(t,{default:function(){return u}});var s=function(){var e=this,t=e._self._c;return t("b-container",{staticClass:"bv-example-row mt-3 text-center"},[t("h3",{staticClass:"underline-steelblue"},[t("b-icon",{attrs:{icon:"person-lines-fill"}}),e._v(" Member Service")],1),t("router-view")],1)},l=[],r={name:"AppAdmin"},a=r,i=n(1001),o=(0,i.Z)(a,s,l,!1,null,"48a1ed3b",null),u=o.exports}}]);
+//# sourceMappingURL=778.c7ebb733.js.map
