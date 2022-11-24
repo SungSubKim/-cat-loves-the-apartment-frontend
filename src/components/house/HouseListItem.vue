@@ -26,7 +26,7 @@ import { mapState } from "vuex";
 		},
 		props: {
 		
-			house:Object, idx: String,
+			house:Object, idx: Number,
 		
 		},
 		methods: {
